@@ -28,7 +28,7 @@ bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%INFO/MAF\t%INFO/CSQ\n' maf_filtere
 bcftools view -e 'INFO/ANN[0] ~ "synonymous_variant"' maf_filtered.vcf -o no_synonymous.vcf
 ``` 
 
-7. Now, time to count the variants in per gene
+6. Now, time to count the variants in per gene
 ```
 bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%INFO/CSQ\n' no_synonymous.vcf | awk -F'|' '{print $4}' | sort | uniq -c > variant_counts.txt
 ```
