@@ -25,7 +25,7 @@ bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%INFO/MAF\t%INFO/CSQ\n' maf_filtere
 
 5. You can remove the synonymous mutations by filtering the .tsv file (using awk) or the below command
 ```
-bcftools view -e 'INFO/ANN[0] ~ "synonymous_variant"' maf_filtered.vcf -o no_synonymous.vcf
+grep -v -E "synonymous_variant|non_coding_transcript_exon_variant" variants_info.tsv > no_synonymous.tsv
 ``` 
 
 6. Now, it is time to count the variants per gene
