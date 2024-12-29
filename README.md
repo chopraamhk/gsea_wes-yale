@@ -36,3 +36,6 @@ bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%INFO/CSQ\n' no_synonymous.vcf | aw
 7. Time to do hypergeometric tests or GSEA analysis
 https://yulab-smu.top/biomedical-knowledge-mining-book/enrichment-overview.html
 https://montilab.github.io/BS831/articles/docs/HyperEnrichment.html
+
+
+might be worth checking: https://github.com/mhguo1/TRAPD
