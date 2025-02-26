@@ -1,0 +1,14 @@
+#Running VEP on lugh 
+
+vep is already installed on /data/dbennett/ensembl-vep/vep
+
+To avoid path and cache issues, go to /data/dbennett/ensembl-vep/ directory and run it from there
+
+./vep --input_file /data4/mchopra/ukb_af_wgs/vcf_files/vep_annotated/testing_target.vcf.gz 
+      --output_file /data4/mchopra/ukb_af_wgs/vcf_files/vep_annotated/annotated_target.txt 
+      --cache /data/dbennett/ensembl-vep/cache/ 
+      --offline 
+      --dir_cache /data/dbennett/ensembl-vep/cache/ 
+      --cache_version 103
+
+As the vep version installed in of version 110, and cache version in installed of v.103, therefore, we are specifying the cache version here as well. :)
