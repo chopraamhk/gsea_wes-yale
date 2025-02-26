@@ -11,4 +11,7 @@ To avoid path and cache issues, go to /data/dbennett/ensembl-vep/ directory and 
       --dir_cache /data/dbennett/ensembl-vep/cache/ 
       --cache_version 103
 
-As the vep version installed in of version 110, and cache version in installed of v.103, therefore, we are specifying the cache version here as well. :)
+#maybe try   --plugin LoF,loftee_path:/path/to/vep_plugins/loftee \ 
+for extra plugin functionalities
+
+As the vep version is installed in version 110, and the cache version is installed in v.103, therefore, we are specifying the cache version here as well. :)
