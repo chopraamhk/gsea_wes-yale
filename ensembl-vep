@@ -2,7 +2,10 @@
 
 vep is already installed on /data/dbennett/ensembl-vep/vep
 
-To avoid path and cache issues, go to /data/dbennett/ensembl-vep/ directory and run it from there
+To avoid path and cache issues, go to /data/dbennett/ensembl-vep/ directory and run it from there. 
+Also, it requires tabix as well. So, load the tabix using conda env. 
+
+conda activate tabix
 
 ./vep --input_file /data4/mchopra/ukb_af_wgs/vcf_files/vep_annotated/testing_target.vcf.gz 
       --output_file /data4/mchopra/ukb_af_wgs/vcf_files/vep_annotated/annotated_target.txt 
