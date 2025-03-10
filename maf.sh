@@ -14,4 +14,4 @@ bcftools merge chr*_200k_wgs.vcf.gz -Oz -o merged_1-22_200k_wgs.vcf.gz
 tabix -p vcf merged_1-22_200k_wgs.vcf.gz  # Index
 
 
-bcftools view -i 'INFO/AF > 0.0001' merged_1-22_200k_wgs.vcf.gz -Oz -o merged_1-22_filtered_by_maf_200k_wgs.vcf.gz
+bcftools view -i 'INFO/AF < 0.0001' merged_1-22_200k_wgs.vcf.gz -Oz -o merged_1-22_filtered_by_maf_200k_wgs.vcf.gz
