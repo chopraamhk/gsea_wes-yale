@@ -14,6 +14,9 @@ conda activate tabix
       --dir_cache /data/dbennett/ensembl-vep/cache/ 
       --cache_version 103
 
+#installation of plugins: 
+#https://gist.github.com/aheinzel/05dbe54cfa6fb52011499afe224875c7
+
 #maybe try   --plugin LoF,loftee_path:/path/to/vep_plugins/loftee \ 
 for extra plugin functionalities
 
