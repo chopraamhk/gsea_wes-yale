@@ -1,0 +1,12 @@
+sudo apt update && sudo apt install -y docker.io
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo usermod -aG docker administrator   #administrator is username 
+#if you dont know your username, use "whoami"
+sudo docker pull ensemblorg/ensembl-vep
+sudo docker run ensemblorg/ensembl-vep vep --help
+
+sudo mkdir -p /home/administrator/ensembl-vep/vep_plugins
+sudo chmod -R 777 /home/administrator/ensembl-vep/vep_plugins
+sudo docker run -v /home/administrator/ensembl-vep/vep_plugins/:/opt/vep/.vep     ensemblorg/ensembl-vep     perl /opt/vep/src/ensembl-vep/INSTALL.pl --PLUGINS all --PLUGINSDIR /opt/vep/.vep --AUTO p
+ls /home/administrator/ensembl-vep/vep_plugins/
