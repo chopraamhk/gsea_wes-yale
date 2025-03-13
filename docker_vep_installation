@@ -10,3 +10,8 @@ sudo mkdir -p /home/administrator/ensembl-vep/vep_plugins
 sudo chmod -R 777 /home/administrator/ensembl-vep/vep_plugins
 sudo docker run -v /home/administrator/ensembl-vep/vep_plugins/:/opt/vep/.vep     ensemblorg/ensembl-vep     perl /opt/vep/src/ensembl-vep/INSTALL.pl --PLUGINS all --PLUGINSDIR /opt/vep/.vep --AUTO p
 ls /home/administrator/ensembl-vep/vep_plugins/
+
+#install grch38 (v104)
+wget ftp://ftp.ensembl.org/pub/release-104/variation/indexed_vep_cache/homo_sapiens_vep_104_GRCh38.tar.gz
+
+tar -xvzf homo_sapiens_vep_104_GRCh38.tar.gz -C /home/administrator/ensembl-vep/cache
