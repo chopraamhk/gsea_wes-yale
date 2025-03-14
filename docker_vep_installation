@@ -1,3 +1,4 @@
+##WORKED IN CLOUDCIX SERVER
 sudo apt update && sudo apt install -y docker.io
 sudo systemctl start docker
 sudo systemctl enable docker
@@ -13,5 +14,24 @@ ls /home/administrator/ensembl-vep/vep_plugins/
 
 #install grch38 (v104)
 wget ftp://ftp.ensembl.org/pub/release-104/variation/indexed_vep_cache/homo_sapiens_vep_104_GRCh38.tar.gz
+sudo mkdir -p /home/administrator/ensembl-vep/cache/homo_sapiens
+sudo chown -R $USER:$USER /home/administrator/ensembl-vep/cache ##changing ownershit --not required all the time 
+sudo chmod 777 /home/administrator/ensembl-vep/cache
 
 tar -xvzf homo_sapiens_vep_104_GRCh38.tar.gz -C /home/administrator/ensembl-vep/cache
+
+##RUNNING 
+sudo docker run --rm -v /home/administrator/ensembl-vep/vep_plugins:/opt/vep/.vep -v /home/administrator/ensembl-vep/cache/homo_sapiens/104_GRCh38:/opt/vep/.vep/homo_sapiens/104_GRCh38 ensemblorg/ensembl-vep vep --cache --offline --dir_cache /opt/vep/.vep --dir_plugins /opt/vep/.vep --cache_version 104 --vcf --species homo_sapiens --input_file /opt/vep/src/ensembl-vep/examples/arabidopsis_thaliana.TAIR10.vcf --output_file /opt/vep/src/ensembl-vep/examples/test.vcf
+or
+sudo docker run --rm -v /home/administrator/ensembl-vep/vep_plugins:/opt/vep/.vep -v /home/administrator/ensembl-vep/cache/homo_sapiens/104_GRCh38:/opt/vep/.vep/homo_sapiens/104_GRCh38 -v /home/administrator/vep_output:/opt/vep/output -v /home/administrator/ensembl-vep/examples:/opt/vep/examples ensemblorg/ensembl-vep vep --cache --offline --dir_cache /opt/vep/.vep --dir_plugins /opt/vep/.vep --cache_version 104 --vcf --species homo_sapiens --input_file /opt/vep/examples/arabidopsis_thaliana.TAIR10.vcf --output_file /opt/vep/output/your_output_file.vcf
+this works below::
+sudo docker run --rm -v /home/administrator/ensembl-vep/vep_plugins:/opt/vep/.vep -v /home/administrator/ensembl-vep/cache/homo_sapiens/104_GRCh38:/opt/vep/.vep/homo_sapiens/104_GRCh38 -v /home/administrator/vep_output:/opt/vep/output -v /home/administrator/ensembl-vep/examples:/opt/vep/examples ensemblorg/ensembl-vep vep --cache --offline --dir_cache /opt/vep/.vep --dir_plugins /opt/vep/.vep --cache_version 104 --vcf --species homo_sapiens --input_file /opt/vep/examples/target_regions_ukb_200k.vcf.gz --output_file /opt/vep/output/your_output_file.vcf
+
+
+
+##installing additional plugins
+wget https://storage.googleapis.com/gcp-public-data--gnomad/release/2.1/coverage/exomes/gnomad.exomes.coverage.summary.tsv.bgz
+gunzip -c gnomad.exomes.coverage.summary.tsv.bgz | sed '1s/.*/#&/' > gnomad.exomes.tabbed.tsv
+bgzip gnomad.exomes.tabbed.tsv
+tabix -s 1 -b 2 -e 2 gnomad.exomes.tabbed.tsv.gz
+
