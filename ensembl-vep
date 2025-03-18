@@ -7,12 +7,12 @@ Also, it requires tabix as well. So, load the tabix using conda env.
 
 conda activate tabix
 
-./vep --input_file /data4/mchopra/ukb_af_wgs/vcf_files/vep_annotated/testing_target.vcf.gz 
-      --output_file /data4/mchopra/ukb_af_wgs/vcf_files/vep_annotated/annotated_target.txt 
-      --cache /data/dbennett/ensembl-vep/cache/ 
-      --offline 
-      --dir_cache /data/dbennett/ensembl-vep/cache/ 
-      --cache_version 103
+./vep --input_file /data4/mchopra/ukb_af_wgs/vcf_files/vep_annotated/testing_target.vcf.gz \
+      --output_file /data4/mchopra/ukb_af_wgs/vcf_files/vep_annotated/annotated_target.txt \
+      --cache /data/dbennett/ensembl-vep/cache/ \
+      --offline \
+      --dir_cache /data/dbennett/ensembl-vep/cache/ \ 
+      --cache_version 103 
 
 #installation of plugins: 
 #https://gist.github.com/aheinzel/05dbe54cfa6fb52011499afe224875c7
@@ -21,3 +21,21 @@ conda activate tabix
 for extra plugin functionalities
 
 As the vep version is installed in version 110, and the cache version is installed in v.103, therefore, we are specifying the cache version here as well. :)
+
+
+using cloudcix:
+
+ sudo docker run --rm  \
+    -v /home/administrator/ensembl-vep/vep_plugins:/opt/vep/.vep \  
+    -v /home/administrator/ensembl-vep/cache/homo_sapiens/104_GRCh38:/opt/vep/.vep/homo_sapiens/104_GRCh38 \
+    -v /home/administrator/vep_output:/opt/vep/output \   
+    -v /home/administrator/ensembl-vep/examples:/opt/vep/examples \  
+    ensemblorg/ensembl-vep vep \  
+    --cache   --dir_cache /opt/vep/.vep \ 
+    --dir_plugins /opt/vep/.vep \  
+    --cache_version 104  --vcf   --species homo_sapiens \   
+    --input_file /opt/vep/examples/target_regions_fixed_ukb_200k.vcf.gz \ 
+    --output_file /opt/vep/output/ukb_wgs_target_test_offl_gnomad.vcf.gz \
+    --custom file=/opt/vep/.vep/gnomad.exomes.r2.1.sites.grch38.merged_noVEP.vcf.gz,short_name=gnomAD,format=vcf,type=exact,coords=0,fields=AC%AN%AF \ 
+    --offline    
+##offline or no offline depends on if you want to use online cache or not --online might be slow. no need to play with cache here..
