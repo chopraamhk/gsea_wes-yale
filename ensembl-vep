@@ -37,5 +37,6 @@ using cloudcix:
     --input_file /opt/vep/examples/target_regions_fixed_ukb_200k.vcf.gz \ 
     --output_file /opt/vep/output/ukb_wgs_target_test_offl_gnomad.vcf.gz \
     --custom file=/opt/vep/.vep/gnomad.exomes.r2.1.sites.grch38.merged_noVEP.vcf.gz,short_name=gnomAD,format=vcf,type=exact,coords=0,fields=AC%AN%AF \ 
-    --offline    
+    --offline \
+    --fork 30 ##to add CPU's
 ##offline or no offline depends on if you want to use online cache or not --online might be slow. no need to play with cache here..
