@@ -25,9 +25,9 @@ sudo docker run --rm -v /home/administrator/ensembl-vep/vep_plugins:/opt/vep/.ve
 or
 sudo docker run --rm -v /home/administrator/ensembl-vep/vep_plugins:/opt/vep/.vep -v /home/administrator/ensembl-vep/cache/homo_sapiens/104_GRCh38:/opt/vep/.vep/homo_sapiens/104_GRCh38 -v /home/administrator/vep_output:/opt/vep/output -v /home/administrator/ensembl-vep/examples:/opt/vep/examples ensemblorg/ensembl-vep vep --cache --offline --dir_cache /opt/vep/.vep --dir_plugins /opt/vep/.vep --cache_version 104 --vcf --species homo_sapiens --input_file /opt/vep/examples/arabidopsis_thaliana.TAIR10.vcf --output_file /opt/vep/output/your_output_file.vcf
 this works below::
-sudo docker run --rm -v /home/administrator/ensembl-vep/vep_plugins:/opt/vep/.vep -v /home/administrator/ensembl-vep/cache/homo_sapiens/104_GRCh38:/opt/vep/.vep/homo_sapiens/104_GRCh38 -v /home/administrator/vep_output:/opt/vep/output -v /home/administrator/ensembl-vep/examples:/opt/vep/examples ensemblorg/ensembl-vep vep --cache --offline --dir_cache /opt/vep/.vep --dir_plugins /opt/vep/.vep --cache_version 104 --vcf --species homo_sapiens --input_file /opt/vep/examples/target_regions_ukb_200k.vcf.gz --output_file /opt/vep/output/your_output_file.vcf
-
-
+sudo docker run --rm -v /home/administrator/ensembl-vep/vep_plugins:/opt/vep/.vep -v /home/administrator/ensembl-vep/cache/homo_sapiens/104_GRCh38:/opt/vep/.vep/homo_sapiens/104_GRCh38 -v /home/administrator/vep_output:/opt/vep/output -v /home/administrator/ensembl-vep/examples:/opt/vep/examples ensemblorg/ensembl-vep vep --cache --offline --dir_cache /opt/vep/.vep --dir_plugins /opt/vep/.vep --cache_version 104 --vcf --species homo_sapiens --input_file /opt/vep/examples/target_regions_ukb_200k.vcf.gz --output_file /opt/vep/output/your_output_file.vcf --custom file=/opt/vep/.vep/gnomad.exomes.r2.1.sites.grch38.merged_noVEP.vcf.gz,short_name=gnomAD,format=vcf,type=exact,coords=0,fields=AC%AN%AF --offline --fork 30 --canonical --domains --plugin LoFtool
+##LoFtool requires score file in plugin folder that is available here. 
+#https://github.com/Ensembl/VEP_plugins/blob/release/113/LoFtool_scores.txt
 
 ##installing additional plugins
 wget https://storage.googleapis.com/gcp-public-data--gnomad/release/2.1/coverage/exomes/gnomad.exomes.coverage.summary.tsv.bgz
