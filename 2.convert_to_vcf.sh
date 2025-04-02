@@ -18,3 +18,6 @@ conda activate bcftools
 
 bcftools merge chr*_200k_wgs.vcf.gz -Oz -o merged_1-22_200k_wgs.vcf.gz
 tabix -p vcf merged_1-22_200k_wgs.vcf.gz
+
+#vcf file contains "chr1" format. Removing chr using below
+bcftools view merged_1-22_200k_wgs.vcf.gz | sed 's/^chr//g' > fixed_merged_1-22_200k_wgs.vcf
