@@ -21,3 +21,13 @@ tabix -p vcf merged_1-22_200k_wgs.vcf.gz
 
 #vcf file contains "chr1" format. Removing chr using below
 bcftools view merged_1-22_200k_wgs.vcf.gz | sed 's/^chr//g' > fixed_merged_1-22_200k_wgs.vcf
+bgzip fixed_merged_1-22_200k_wgs.vcf
+tabix -p vcf fixed_merged_1-22_200k_wgs.vcf
+
+##focusing only targetted regions
+bcftools view -R ../target_regions_yale_wes/xgen_plus_spikein.b38.bed fixed_merged_1-22_200k_wgs.vcf.gz > target_regions_ukb_200k.vcf
+
+bgzip target_regions_ukb_200k.vcf
+tabix -p vcf target_regions_ukb_200k.vcf.gz
+
+
