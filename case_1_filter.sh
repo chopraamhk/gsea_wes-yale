@@ -17,3 +17,8 @@ bedtools intersect -v -a TAA_1278EURpts_AC0_VCF.vcf.gz -b target_regions_yale_we
 bcftools view -R target_regions_yale_wes/xgen_plus_spikein.b38.bed target_regions_yale_wes/xgen_plus_spikein.b38.bed > target_TAA_1278EUR_200k.vcf
 bgzip target_TAA_1278EUR_200k.vcf
 tabix -p vcf target_TAA_1278EUR_200k.vcf
+
+#if you want to know the number of variants in a specific vcf file 
+#bcftools view -H file.vcf | wc -l
+
+#-H -> it will get rid of the header
