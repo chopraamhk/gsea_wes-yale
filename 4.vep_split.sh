@@ -22,10 +22,11 @@ tabix -p vcf ukb_wgs_target_ac0_gnomad.vcf.gz
 
 #you can avoid following 4 lines of code and can start without getting worst or canonical transcripts
 #splitting info fields so that we can extract by inputting info easily later
-bcftools +split-vep -p worst_ -a CSQ -c Allele,Consequence,IMPACT,SYMBOL,Gene,Feature_type,Feature,BIOTYPE,INTRON,HGVSc,HGVSp,cDNA_position,CDS_position,Protein_position,Amino_acids,Codons,Existing_variation,DISTANCE,STRAND,FLAGS,SYMBOL_SOURCE,HGNC_ID,CANONICAL,SOURCE,DOMAINS,LoFtool,gnomAD,gnomAD_AC,gnomAD_AN,gnomAD_AF -s worst ukb_wgs_target_ac0_gnomad.vcf.gz -o worst_output.vcf
-bcftools +split-vep -p canon_ -a CSQ -c Allele,Consequence,IMPACT,SYMBOL,Gene,Feature_type,Feature,BIOTYPE,INTRON,HGVSc,HGVSp,cDNA_position,CDS_position,Protein_position,Amino_acids,Codons,Existing_variation,DISTANCE,STRAND,FLAGS,SYMBOL_SOURCE,HGNC_ID,CANONICAL,SOURCE,DOMAINS,LoFtool,gnomAD,gnomAD_AC,gnomAD_AN,gnomAD_AF -s primary ukb_wgs_target_ac0_gnomad.vcf.gz -o canonical_output.vcf
-paste <(bcftools view worst_output.vcf) <(bcftools view canonical_output.vcf) > combined_worst_canonical_split_vep_results.vcf
-paste <(bcftools view worst_output.vcf) <(bcftools view canonical_output.vcf) > combined_worst_canonical_split_vep_results.tsv
+#bcftools +split-vep -p worst_ -a CSQ -c Allele,Consequence,IMPACT,SYMBOL,Gene,Feature_type,Feature,BIOTYPE,INTRON,HGVSc,HGVSp,cDNA_position,CDS_position,Protein_position,Amino_acids,Codons,Existing_variation,DISTANCE,STRAND,FLAGS,SYMBOL_SOURCE,HGNC_ID,CANONICAL,SOURCE,DOMAINS,LoFtool,gnomAD,gnomAD_AC,gnomAD_AN,gnomAD_AF -s worst ukb_wgs_target_ac0_gnomad.vcf.gz -o worst_output.vcf
+#bcftools +split-vep -p canon_ -a CSQ -c Allele,Consequence,IMPACT,SYMBOL,Gene,Feature_type,Feature,BIOTYPE,INTRON,HGVSc,HGVSp,cDNA_position,CDS_position,Protein_position,Amino_acids,Codons,Existing_variation,DISTANCE,STRAND,FLAGS,SYMBOL_SOURCE,HGNC_ID,CANONICAL,SOURCE,DOMAINS,LoFtool,gnomAD,gnomAD_AC,gnomAD_AN,gnomAD_AF -s primary ukb_wgs_target_ac0_gnomad.vcf.gz -o canonical_output.vcf
+#paste <(bcftools view worst_output.vcf) <(bcftools view canonical_output.vcf) > combined_worst_canonical_split_vep_results.vcf
+#paste <(bcftools view worst_output.vcf) <(bcftools view canonical_output.vcf) > combined_worst_canonical_split_vep_results.tsv
+##i was testing but -p worst_ -p canon_ can be given together in one command as well. that's recommendable.
 
 #OR JUST DO BELOW 
 bcftools +split-vep -a CSQ -c Allele,Consequence,IMPACT,SYMBOL,Gene,Feature_type,Feature,BIOTYPE,INTRON,HGVSc,HGVSp,cDNA_position,CDS_position,Protein_position,Amino_acids,Codons,Existing_variation,DISTANCE,STRAND,FLAGS,SYMBOL_SOURCE,HGNC_ID,CANONICAL,SOURCE,DOMAINS,LoFtool,gnomAD,gnomAD_AC,gnomAD_AN,gnomAD_AF -s primary ukb_wgs_target_ac0_gnomad.vcf.gz -o vep_split.vcf
