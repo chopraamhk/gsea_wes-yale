@@ -41,3 +41,10 @@ tabix -p vcf vep_split.vcf.gz
 bcftools view -i 'INFO/gnomAD_AF+0.0<0.0001' vep_split.vcf.gz > ukb_wgs_gnomad_rare_filtered.vcf
 bgzip ukb_wgs_gnomad_rare_filtered.vcf
 tabix -p vcf ukb_wgs_gnomad_rare_filtered.vcf.gz
+
+##extracting rare variants
+bcftools view -R genes_108_GRCh38.bed ukb_wgs_gnomad_rare_filtered.vcf.gz > genes_108_rare.vcf
+bcftools view -R genes_27_GRCh38.bed ukb_wgs_gnomad_rare_filtered.vcf.gz > genes_27_rare.vcf
+bcftools view -R utp11_vps8.bed ukb_wgs_gnomad_rare_filtered.vcf.gz > genes_utp11_vps8_rare.vcf
+
+##now, you can see which variants you would like to focus further. Can filter using #info as well.
