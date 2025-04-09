@@ -48,3 +48,11 @@ bcftools view -R genes_27_GRCh38.bed ukb_wgs_gnomad_rare_filtered.vcf.gz > genes
 bcftools view -R utp11_vps8.bed ukb_wgs_gnomad_rare_filtered.vcf.gz > genes_utp11_vps8_rare.vcf
 
 ##now, you can see which variants you would like to focus further. Can filter using #info as well.
+#1) Likely-gene disrupting variants (LGD), 
+#premature stop-gain
+#frameshift indels
+#canonical splicing variants
+#cryptic splice site variants
+#exon deletions 
+#2) Deleterious missense variants (D-mis), 
+#(defined as having a gMVP (in-silico predictor of pathogenicity) score of greater than 0.3, which is a minimal threshold for damaging variants.
