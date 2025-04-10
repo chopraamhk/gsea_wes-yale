@@ -59,6 +59,10 @@ tabix -p vcf -f genes_108_rare.vcf.gz
 tabix -p vcf -f genes_27_rare.vcf.gz
 tabix -p vcf -f genes_utp11_vps8_rare.vcf.gz
 
+bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%INFO/gnomAD_AF\t%INFO/CSQ\n' genes_27_rare.vcf.gz > variants_27_info.tsv
+bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%INFO/gnomAD_AF\t%INFO/CSQ\n' genes_108_rare.vcf.gz > variants_108_info.tsv
+bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%INFO/gnomAD_AF\t%INFO/CSQ\n' genes_utp11_vps8_rare.vcf.gz > variants_utp11_vps8_info.tsv
+
 ##now, you can see which variants you would like to focus further. Can filter using #info as well.
 #1) Likely-gene disrupting variants (LGD), 
 #premature stop-gain
@@ -69,12 +73,3 @@ tabix -p vcf -f genes_utp11_vps8_rare.vcf.gz
 #2) Deleterious missense variants (D-mis), 
 #(defined as having a gMVP (in-silico predictor of pathogenicity) score of greater than 0.3, which is a minimal threshold for damaging variants.
 
-bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%INFO/gnomAD_AF\n' your_file.vcf | \
-awk 'BEGIN { OFS="\t"; print "chr","pos","ref","alt","variant_type","gnomad_af" } 
-{
-    if(length($3)==1 && length($4)==1) vt="SNV";
-    else if(length($3)<length($4)) vt="insertion";
-    else if(length($3)>length($4)) vt="deletion";
-    else vt="other";
-    print $1, $2, $3, $4, vt, ($5=="" ? "." : $5);
-}'
