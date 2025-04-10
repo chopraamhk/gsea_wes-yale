@@ -25,7 +25,7 @@ tabix -p vcf target_TAA_1278EUR_200k.vcf.gz
 
 #Since the file is already annotated by vep, we are going to filter the variants by 10e-4 maf (i.e., 0.001)
 #looking for rare variants here
-bcftools view -i 'INFO/gnomAD_AF<0.0001' target_TAA_1278EUR_200k.vcf.gz > gnomad_maf_filtered.vcf
+bcftools view -i 'INFO/gnomAD_AF!="." && INFO/gnomAD_AF+0.0<0.0001 && INFO/gnomAD_AF+0.0>0' target_TAA_1278EUR_200k.vcf.gz > gnomad_maf_filtered.vcf
 
 bgzip gnomad_maf_filtered.vcf
 tabix -p vcf gnomad_maf_filtered.vcf.gz
