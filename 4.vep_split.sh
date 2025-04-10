@@ -42,6 +42,10 @@ bcftools view -i 'INFO/gnomAD_AF+0.0<0.0001' vep_split.vcf.gz > ukb_wgs_gnomad_r
 bgzip ukb_wgs_gnomad_rare_filtered.vcf
 tabix -p vcf ukb_wgs_gnomad_rare_filtered.vcf.gz
 
+or
+bcftools view -i 'INFO/gnomAD_AF!="." && INFO/gnomAD_AF+0.0<0.0001' vep_split.vcf > ukb_wgs_gnomad_rare_filtered_1.vcf
+#this can get rid of variants where gnomAD_AF is missing
+ 
 ##extracting rare variants
 bcftools view -R genes_108_GRCh38.bed ukb_wgs_gnomad_rare_filtered.vcf.gz > genes_108_rare.vcf
 bcftools view -R genes_27_GRCh38.bed ukb_wgs_gnomad_rare_filtered.vcf.gz > genes_27_rare.vcf
