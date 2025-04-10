@@ -23,7 +23,7 @@ tabix -p vcf target_TAA_1278EUR_200k.vcf.gz
 
 #-H -> it will get rid of the header
 
-#Since the file is already annotated by vep, we are going to filter the variants by 10e-4 maf (i.e., 0.001)
+#Since the file is already annotated by vep, we are going to filter the variants by 10e-4 maf (i.e., 0.0001)
 #looking for rare variants here
 bcftools view -i 'INFO/gnomAD_AF!="." && INFO/gnomAD_AF+0.0<0.0001 && INFO/gnomAD_AF+0.0>0' target_TAA_1278EUR_200k.vcf.gz > gnomad_maf_filtered.vcf
 
