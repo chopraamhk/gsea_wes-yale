@@ -31,3 +31,11 @@ bgzip gnomad_maf_filtered.vcf
 tabix -p vcf gnomad_maf_filtered.vcf.gz
 ##now, you can do the filtering based on what kind of variants you are looking for ..
 
+bcftools view -R genes_108_GRCh38.bed gnomad_maf_filtered.vcf.gz > case_genes_108_rare.vcf
+bcftools view -R genes_27_GRCh38.bed gnomad_maf_filtered.vcf.gz > case_genes_27_rare.vcf
+bcftools view -R utp11_vps8.bed gnomad_maf_filtered.vcf.gz > case_genes_utp11_vps8_rare.vcf
+
+bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%INFO/gnomAD_AF\t%INFO/CSQ\n' case_genes_27_rare.vcf > case_variants_27_info.tsv
+bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%INFO/gnomAD_AF\t%INFO/CSQ\n' case_genes_108_rare.vcf > case_variants_108_info.tsv
+bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t%INFO/gnomAD_AF\t%INFO/CSQ\n' case_genes_utp11_vps8_rare.vcf > case_variants_utp11_vps8_info.tsv
+
