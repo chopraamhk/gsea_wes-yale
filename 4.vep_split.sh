@@ -43,13 +43,21 @@ bgzip ukb_wgs_gnomad_rare_filtered.vcf
 tabix -p vcf ukb_wgs_gnomad_rare_filtered.vcf.gz
 
 or
-bcftools view -i 'INFO/gnomAD_AF!="." && INFO/gnomAD_AF+0.0<0.0001' vep_split.vcf > ukb_wgs_gnomad_rare_filtered_1.vcf
-#this can get rid of variants where gnomAD_AF is missing
+bcftools view -i 'INFO/gnomAD_AF!="." && INFO/gnomAD_AF+0.0<0.0001 && INFO/gnomAD_AF+0.0>0' vep_split.vcf > ukb_wgs_gnomad_rare_filtered.vcf
+#this can get rid of variants where gnomAD_AF is missing and gnomAD_AF is 0. 
  
 ##extracting rare variants
 bcftools view -R genes_108_GRCh38.bed ukb_wgs_gnomad_rare_filtered.vcf.gz > genes_108_rare.vcf
 bcftools view -R genes_27_GRCh38.bed ukb_wgs_gnomad_rare_filtered.vcf.gz > genes_27_rare.vcf
 bcftools view -R utp11_vps8.bed ukb_wgs_gnomad_rare_filtered.vcf.gz > genes_utp11_vps8_rare.vcf
+
+bgzip genes_108_rare.vcf
+bgzip genes_27_rare.vcf
+bgzip genes_utp11_vps8_rare.vcf
+
+tabix -p vcf -f genes_108_rare.vcf.gz
+tabix -p vcf -f genes_27_rare.vcf.gz
+tabix -p vcf -f genes_utp11_vps8_rare.vcf.gz
 
 ##now, you can see which variants you would like to focus further. Can filter using #info as well.
 #1) Likely-gene disrupting variants (LGD), 
